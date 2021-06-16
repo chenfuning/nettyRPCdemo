@@ -1,4 +1,7 @@
-package provider;
+package provider.com.ning.service;
+
+import provider.RpcAnnotation;
+
 /**
  * @desc    提供服务的实现类
  * @author  Admin

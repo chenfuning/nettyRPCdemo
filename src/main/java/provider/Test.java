@@ -1,5 +1,7 @@
 package provider;
 
+import provider.com.ning.service.HelloService;
+import provider.com.ning.service.HelloServiceImpl;
 import provider.register.RegisterCenter;
 import provider.register.RegisterCenterImpl;
 /**
@@ -21,7 +23,7 @@ public class Test {
         //实例化服务接口实例
         HelloService helloService=new HelloServiceImpl();
         RegisterCenter registerCenter=new RegisterCenterImpl();
-        RpcServer rpcServer=new RpcServer(registerCenter,"127.0.0.1:8080");
+        RpcServer rpcServer=new RpcServer(registerCenter,"127.0.0.1:8845");
         //再注册和端口监听之前，维护多个实例对象到hashmap
         rpcServer.bind(helloService);
         //服务发布(注册服务+端口监听（接收数据）)

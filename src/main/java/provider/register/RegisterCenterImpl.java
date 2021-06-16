@@ -6,7 +6,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 
 public class RegisterCenterImpl implements RegisterCenter {
-
+    //连接zk
     //初始化CuratorFramework
     private CuratorFramework curatorFramework;
     {
