@@ -36,7 +36,7 @@ public class RpcClientProxy {
                         request.setMethodName(method.getName());
                         request.setParameterTypes(method.getParameterTypes());
                         request.setParameters(args);
-
+                        System.out.println("客户端可以调用动态代理类并调用了invoke方法"+request.getMethodName());
                         //通信把RpcRequest发送个对应的服务端
 //                        String serviceName=interfaceClass.getName();
                         String serviceName=interfaceClass.getSimpleName();
@@ -67,6 +67,7 @@ public class RpcClientProxy {
                                     }
                                 });
                         ChannelFuture future=bootstrap.connect().sync();
+                        System.out.println("客户端"+future.channel().localAddress()+"连接");
                         future.channel().writeAndFlush(request);
                         System.out.println("客户端已发送请求数据");
                         future.channel().closeFuture().sync();

@@ -13,6 +13,7 @@ public class rpcProxyHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println("服务端有数据了");
         Response=msg;
     }
 }
