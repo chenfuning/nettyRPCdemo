@@ -1,10 +1,14 @@
 package httpResult;
+
+import java.io.Serializable;
+
 /**
  * @desc    请求消息结构
  * @author  Admin
  * @create  2021/6/15
  **/
-public class RpcRequest {
+public class RpcRequest implements Serializable {
+    private static final long  SerialVersionUID = 1L;
     //请求id
     private String requestId;
     //接口名称

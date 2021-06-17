@@ -18,7 +18,7 @@ public class RpcServerHandler extends ChannelInboundHandlerAdapter {
         //ctx可以用来服务端发送数据给客户
         //msg是客户端发来的数据
         //获取客户端发送来的数据,转发为封装好的数据，
-        System.out.println("有数据了");
+        System.out.println("有数据了"+msg);
         RpcRequest rpcRequest=(RpcRequest) msg;
         System.out.println("客户端封装好的数据是："+rpcRequest.getInterfaceName()+rpcRequest.getMethodName());
         //发送数据返回给客户端
@@ -38,5 +38,10 @@ public class RpcServerHandler extends ChannelInboundHandlerAdapter {
         ctx.write(result);
         ctx.flush();
         ctx.close();
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+       System.out.println("服务端准备就绪");
     }
 }

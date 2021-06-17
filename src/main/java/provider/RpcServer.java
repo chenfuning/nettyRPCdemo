@@ -1,6 +1,7 @@
 package provider;
 
 import com.sun.jmx.snmp.ServiceName;
+import httpResult.MarshallingCodeCFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -30,7 +31,6 @@ public class RpcServer {
             this.serverAddress=serverAddress;
     }
     //发布服务到监听端口
-
     //把服务接口实现类放到handlerMap中
     public void bind(Object... services){
         for(Object service:services){
@@ -62,13 +62,15 @@ public class RpcServer {
             @Override
             protected void initChannel(Channel channel) throws Exception {
                 ChannelPipeline pipeline=channel.pipeline();
-                //LengthFieldBasedFrameDecoder自定义长度解决TCP粘包黏包问题
-                pipeline.addLast("frameDecoder",new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4));
-                pipeline.addLast("frameEncoder",new LengthFieldPrepender(4));
-                //对象参数类型编码器
-                pipeline.addLast("Encoder",new ObjectEncoder());
-                // 对象参数类型解码器
-                pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));
+//                //LengthFieldBasedFrameDecoder自定义长度解决TCP粘包黏包问题
+//                pipeline.addLast("frameDecoder",new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4));
+//                pipeline.addLast("frameEncoder",new LengthFieldPrepender(4));
+//                //对象参数类型编码器
+//                pipeline.addLast("Encoder",new ObjectEncoder());
+//                // 对象参数类型解码器
+//                pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));
+                pipeline.addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
+                pipeline.addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
                 //自定义handler
                 pipeline.addLast(new RpcServerHandler(handlerMap));
             }

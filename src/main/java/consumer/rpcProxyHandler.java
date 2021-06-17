@@ -16,4 +16,9 @@ public class rpcProxyHandler extends ChannelInboundHandlerAdapter {
         System.out.println("服务端有数据了");
         Response=msg;
     }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("客户端已连接");
+    }
 }
